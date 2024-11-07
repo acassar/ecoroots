@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MapComponent from './components/map/MapComponent.vue';
 </script>
 
 <template>
@@ -7,7 +8,7 @@
   </header>
 
   <main>
-    
+  <MapComponent />    
   </main>
 </template>
 
