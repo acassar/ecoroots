@@ -59,22 +59,22 @@ onMounted(async () => {
 
 <template>
   <div id="map-container">
-    <button @click="setPArks([])">clear store</button>
+    <!-- <button @click="setPArks([])">clear store</button> -->
     <div id="map"></div>
   </div>
 </template>
 
 <style scoped>
 #map-container {
-  height: 100vh;
-  width: 100vw;
+  height: inherit;
+  width: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #map {
-  height: 90vh;
-  width: 90vw;
+  height: 90%;
+  width: 90%;
 }
 </style>
