@@ -18,6 +18,7 @@ export interface OverpassWay {
   nodes: number[]
   tags?: { [key: string]: string }
   geometry?: OverpassGeometry[]
+  bounds?: OverpassBounds
 }
 
 export interface OverpassRelation {
@@ -25,6 +26,7 @@ export interface OverpassRelation {
   id: number
   members: OverpassMember[]
   tags?: { [key: string]: string }
+  OverpassBounds?: OverpassBounds
 }
 
 export interface OverpassMember {
@@ -35,3 +37,4 @@ export interface OverpassMember {
 }
 
 export type OverpassGeometry = { lat: number; lon: number }
+export type OverpassBounds = { minlat: number; minlon: number; maxlat: number; maxlon: number }
