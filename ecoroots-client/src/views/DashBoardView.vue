@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import MapComponent from '@/components/map/MapComponent.vue'
-import { Button } from 'primevue'
+import StatsPanel from '@/components/stats/StatsPanel.vue'
 </script>
 
 <template>
   <div id="dashboard-container">
     <MapComponent />
-    <div>
-      <Button>
-        <v-icon id="stats-btn-icon" alt="stats button icon" scale="1" name="bi-chevron-left" />
-      </Button>
-    </div>
+    <StatsPanel />
   </div>
 </template>
 

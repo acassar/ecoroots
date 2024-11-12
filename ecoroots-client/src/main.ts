@@ -7,7 +7,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-import { BiChevronLeft } from 'oh-vue-icons/icons'
+import { BiChevronLeft, BiChevronRight } from 'oh-vue-icons/icons'
 
 import { definePreset, palette } from '@primevue/themes'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
@@ -28,7 +28,7 @@ const MyPreset = definePreset(Aura, {
   },
 })
 
-addIcons(BiChevronLeft)
+addIcons(BiChevronLeft, BiChevronRight)
 app.component('v-icon', OhVueIcon)
 
 app.use(pinia)
