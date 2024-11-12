@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MapComponent from './components/map/MapComponent.vue'
+import DashBoardView from './views/DashBoardView.vue'
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import MapComponent from './components/map/MapComponent.vue'
   </header>
 
   <main>
-    <MapComponent />
+    <DashBoardView></DashBoardView>
   </main>
 </template>
 
