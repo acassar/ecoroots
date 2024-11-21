@@ -1,13 +1,8 @@
 <script setup lang="ts">
-import { useGreenAreasLayer } from '@/composables/useGreenAreas'
-import { fetchOverpassData } from '@/services/api/overpassQuery'
-import { OVERPASS_GREEN_AREAS_QUERY } from '@/services/overpassTurbo/queries'
-import { useGreenAreasStore } from '@/stores/useGreenAreasStore'
+import { useGreenAreasLayer } from '@/composables/useGreenAreasLayer'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { onMounted, ref, type Ref } from 'vue'
-
-const { greenAreas: greenAreasData, setGreenAreas } = useGreenAreasStore()
 
 const leafletMap = ref<L.Map | null>(null)
 
@@ -23,17 +18,6 @@ const initMap = () => {
   leafletMap.value = _map
 }
 
-const fetchGreenAreas = async () => {
-  try {
-    if (!greenAreasData.length) {
-      const data = await fetchOverpassData(OVERPASS_GREEN_AREAS_QUERY)
-
-      setGreenAreas(data.elements)
-    }
-  } catch (error) {
-    console.error('Error fetching Overpass data:', error)
-  }
-}
 const initLayers = () => {
   initGreenAreas()
 }
@@ -42,9 +26,8 @@ const handleLayersDisplay = () => {
   greenAreas.value?.addTo(leafletMap.value as L.Map)
 }
 
-onMounted(async () => {
+onMounted(() => {
   initMap()
-  await fetchGreenAreas()
   initLayers()
   handleLayersDisplay()
 })
