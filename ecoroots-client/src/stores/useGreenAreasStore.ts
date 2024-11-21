@@ -2,6 +2,9 @@ import type { OverpassElement } from '@/types/overpassTurbo/OverpassTurboTypes'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
+/**
+ * Store to manage green areas
+ */
 export const useGreenAreasStore = defineStore(
   'greenAreas',
   () => {
@@ -21,18 +24,18 @@ export const useGreenAreasStore = defineStore(
       greenAreas.value.filter((element) => element.type === 'relation'),
     )
 
+    // - Filter green areas by type - //
     const parks = computed(() => greenAreasWays.value.filter((way) => way.tags?.leisure === 'park'))
     const gardens = computed(() =>
       greenAreasWays.value.filter((way) => way.tags?.leisure === 'garden'),
     )
-
     const pitchs = computed(() =>
       greenAreasWays.value.filter((way) => way.tags?.leisure === 'pitch'),
     )
-
     const playgrounds = computed(() =>
       greenAreasWays.value.filter((way) => way.tags?.leisure === 'playground'),
     )
+    // -- //
 
     return {
       greenAreas,

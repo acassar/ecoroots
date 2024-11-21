@@ -1,4 +1,7 @@
-export const OVERPASS_PARKS_QUERY = `
+/**
+ * Overpass Turbo quey to get all the green areas in a given bounding box, containing parks, gardens, pitchs, playgrounds, forests and woods
+ */
+export const OVERPASS_GREEN_AREAS_QUERY = `
         [out:json];
         area["wikidata"="Q90"]->.searchArea;
         (
@@ -10,4 +13,4 @@ export const OVERPASS_PARKS_QUERY = `
           relation["natural"="wood"](area.searchArea);
         );
         out geom;
-    `;
+    `

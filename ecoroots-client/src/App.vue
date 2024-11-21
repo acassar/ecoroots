@@ -4,7 +4,6 @@ import DashBoardView from './views/DashBoardView.vue'
 
 <template>
   <header>
-    <!--  -->
     <img alt="App logo" src="@/assets/images/logo.svg" style="width: 50px; height: 50px" />
     <h1>ECOROOTS</h1>
   </header>

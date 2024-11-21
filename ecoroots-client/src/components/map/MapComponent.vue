@@ -1,19 +1,13 @@
 <script setup lang="ts">
 import { useGreenAreas } from '@/composables/useGreenAreas'
 import { fetchOverpassData } from '@/services/api/overpassQuery'
-import { OVERPASS_PARKS_QUERY } from '@/services/overpassTurbo/queries'
+import { OVERPASS_GREEN_AREAS_QUERY } from '@/services/overpassTurbo/queries'
 import { useGreenAreasStore } from '@/stores/useGreenAreasStore'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { onMounted, ref, type Ref } from 'vue'
 
-const {
-  greenAreas: greenAreasData,
-  setGreenAreas,
-  greenAreasNodes,
-  greenAreasRelations,
-  greenAreasWays,
-} = useGreenAreasStore()
+const { greenAreas: greenAreasData, setGreenAreas } = useGreenAreasStore()
 
 const leafletMap = ref<L.Map | null>(null)
 
@@ -32,12 +26,9 @@ const initMap = () => {
 const fetchGreenAreas = async () => {
   try {
     if (!greenAreasData.length) {
-      const data = await fetchOverpassData(OVERPASS_PARKS_QUERY)
+      const data = await fetchOverpassData(OVERPASS_GREEN_AREAS_QUERY)
 
-      console.log(data)
       setGreenAreas(data.elements)
-    } else {
-      console.log('Parks already fetched ', greenAreasData)
     }
   } catch (error) {
     console.error('Error fetching Overpass data:', error)
@@ -56,10 +47,6 @@ onMounted(async () => {
   await fetchGreenAreas()
   initLayers()
   handleLayersDisplay()
-
-  // leafletMap.value?.on('moveend', handleLayersDisplay)
-
-  console.log('ways:', greenAreasNodes, greenAreasRelations, greenAreasWays)
 })
 </script>
 
