@@ -1,12 +1,17 @@
 <script setup lang="ts">
-import { useGreenAreasLayer } from '@/composables/useGreenAreasLayer'
+import { useGreenAreasLayer } from '@/composables/layers/useGreenAreasLayer'
+import type { TUseGreenAreasTypes } from '@/stores/useGreenAreasTypes'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { onMounted, ref, type Ref } from 'vue'
 
+const props = defineProps<{
+  greenAreasTypes: TUseGreenAreasTypes
+}>()
+
 const leafletMap = ref<L.Map | null>(null)
 
-const { greenAreas, init: initGreenAreas } = useGreenAreasLayer(leafletMap as Ref<L.Map | null>)
+useGreenAreasLayer(leafletMap as Ref<L.Map | null>, props.greenAreasTypes)
 
 const initMap = () => {
   const _map = L.map('map').setView([48.8566, 2.3522], 13) //Pointed to Paris
@@ -18,18 +23,8 @@ const initMap = () => {
   leafletMap.value = _map
 }
 
-const initLayers = () => {
-  initGreenAreas()
-}
-
-const handleLayersDisplay = () => {
-  greenAreas.value?.addTo(leafletMap.value as L.Map)
-}
-
 onMounted(() => {
   initMap()
-  initLayers()
-  handleLayersDisplay()
 })
 </script>
 

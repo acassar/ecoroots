@@ -5,23 +5,25 @@ import StatsPanel from '@/components/stats/StatsPanel.vue'
 import { useFetchGreenAreas } from '@/composables/fetcher/greenAreasFetcher'
 import { useGreenAreasStore } from '@/stores/useGreenAreasStore'
 import { useGreenAreasTypes } from '@/stores/useGreenAreasTypes'
+import type { TGreenAreasType } from '@/types/greenAreasTypes/greenAreasTypes'
 import { storeToRefs } from 'pinia'
 import { Button } from 'primevue'
 import { computed } from 'vue'
 
 const { greenAreas: greenAreasData } = useGreenAreasStore()
 const { greenAreasWays } = storeToRefs(useGreenAreasStore())
-const { gardens, parks, pitchs, playgrounds, forests, woods } = useGreenAreasTypes(greenAreasWays)
+const greenAreasTypes = useGreenAreasTypes(greenAreasWays)
+const { gardens, parks, pitchs, playgrounds, forests, woods } = greenAreasTypes
 const { fetchCachedGreenAreas, isLoading, fetchGreenAreas } = useFetchGreenAreas()
 
-const data = computed(() => {
+const data = computed<{ value: number; name: TGreenAreasType }[]>(() => {
   return [
-    { value: gardens.value.length, name: 'Jardins' },
-    { value: parks.value.length, name: 'Parcs' },
-    { value: pitchs.value.length, name: 'Terrains' },
-    { value: playgrounds.value.length, name: 'Terrains de jeux' },
-    { value: forests.value.length, name: 'Forêts' },
-    { value: woods.value.length, name: 'Bois' },
+    { value: gardens.value.length, name: 'gardens' },
+    { value: parks.value.length, name: 'parks' },
+    { value: pitchs.value.length, name: 'pitchs' },
+    { value: playgrounds.value.length, name: 'playgrounds' },
+    { value: forests.value.length, name: 'forests' },
+    { value: woods.value.length, name: 'woods' },
   ]
 })
 
@@ -36,8 +38,8 @@ fetchCachedGreenAreas()
     <Button color="primary" @click="fetchGreenAreas">Recharger les données</Button>
 
     <div id="dashboard-main-components" v-if="!isLoading">
-      <MapComponent />
-      <StatsPanel :data />
+      <MapComponent :greenAreasTypes />
+      <StatsPanel :greenAreasTypes :data />
     </div>
     <LoadingComponent v-else></LoadingComponent>
   </div>

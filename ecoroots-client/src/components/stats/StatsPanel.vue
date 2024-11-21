@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { CssVariables } from '@/services/css/cssVarService'
+import type { TUseGreenAreasTypes } from '@/stores/useGreenAreasTypes'
 import type { EChartsOption } from 'echarts'
 import { PieChart } from 'echarts/charts'
 import { LegendComponent, TooltipComponent } from 'echarts/components'
@@ -15,6 +16,7 @@ const props = defineProps<{
     value: number
     name: string
   }[]
+  greenAreasTypes: TUseGreenAreasTypes
 }>()
 
 const option = computed<EChartsOption>(() => {
@@ -45,6 +47,15 @@ const option = computed<EChartsOption>(() => {
     ],
   }
 })
+
+// echart doesn't export types for events
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const legendSelectChanged = (event: any) => {
+  console.log(event)
+  if (props.greenAreasTypes.greenAreaTypes.value.has(event.name))
+    props.greenAreasTypes.removeGreenAreaType(event.name)
+  else props.greenAreasTypes.addGreenAreaType(event.name)
+}
 </script>
 
 <template>
@@ -54,7 +65,7 @@ const option = computed<EChartsOption>(() => {
         <h1>Statistiques</h1>
       </span>
       <div>
-        <v-chart class="pie" :option="option" />
+        <v-chart class="pie" :option="option" @legendselectchanged="legendSelectChanged" />
       </div>
     </div>
   </div>
