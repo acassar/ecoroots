@@ -1,23 +1,29 @@
 <script setup lang="ts">
 import { CssVariables } from '@/services/css/cssVarService'
 import type { TUseGreenAreasTypes } from '@/stores/useGreenAreasTypes'
+import type { TGreenAreasType } from '@/types/greenAreasTypes/greenAreasTypes'
 import type { EChartsOption } from 'echarts'
 import { PieChart } from 'echarts/charts'
 import { LegendComponent, TooltipComponent } from 'echarts/components'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
+import type {
+  PieCallbackDataParams,
+  PieDataItemOption,
+} from 'echarts/types/src/chart/pie/PieSeries.js'
 import { computed } from 'vue'
 import VChart from 'vue-echarts'
 
 use([TooltipComponent, LegendComponent, PieChart, CanvasRenderer])
 
 const props = defineProps<{
-  data: {
-    value: number
-    name: string
-  }[]
+  data: PieDataItemOption[]
   greenAreasTypes: TUseGreenAreasTypes
 }>()
+
+const getDataColor = (data: PieCallbackDataParams) => {
+  return props.greenAreasTypes.getTypeColor(data.name as TGreenAreasType)
+}
 
 const option = computed<EChartsOption>(() => {
   return {
@@ -41,6 +47,7 @@ const option = computed<EChartsOption>(() => {
           borderRadius: 5,
           borderColor: CssVariables.getCssVar('--color-background'),
           borderWidth: 5,
+          color: getDataColor,
         },
         data: props.data,
       },

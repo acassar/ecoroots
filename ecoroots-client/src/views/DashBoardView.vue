@@ -6,6 +6,7 @@ import { useFetchGreenAreas } from '@/composables/fetcher/greenAreasFetcher'
 import { useGreenAreasStore } from '@/stores/useGreenAreasStore'
 import { useGreenAreasTypes } from '@/stores/useGreenAreasTypes'
 import type { TGreenAreasType } from '@/types/greenAreasTypes/greenAreasTypes'
+import type { PieDataItemOption } from 'echarts/types/src/chart/pie/PieSeries.js'
 import { storeToRefs } from 'pinia'
 import { Button } from 'primevue'
 import { computed } from 'vue'
@@ -16,7 +17,11 @@ const greenAreasTypes = useGreenAreasTypes(greenAreasWays)
 const { gardens, parks, pitchs, playgrounds, forests, woods } = greenAreasTypes
 const { fetchCachedGreenAreas, isLoading, fetchGreenAreas } = useFetchGreenAreas()
 
-const data = computed<{ value: number; name: TGreenAreasType }[]>(() => {
+interface CustomPieDataItemOption extends PieDataItemOption {
+  name: TGreenAreasType
+}
+
+const data = computed<CustomPieDataItemOption[]>(() => {
   return [
     { value: gardens.value.length, name: 'gardens' },
     { value: parks.value.length, name: 'parks' },

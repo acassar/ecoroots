@@ -48,6 +48,25 @@ export function useGreenAreasTypes(greenAreasWays: Ref<OverpassWay[]>) {
     console.log('after ', greenAreaTypes.value)
   }
 
+  const getTypeColor = (type: TGreenAreasType) => {
+    switch (type) {
+      case 'forests':
+        return '#104911'
+      case 'gardens':
+        return '#548C2F'
+      case 'parks':
+        return '#AD7A99'
+      case 'pitchs':
+        return '#FEDC97'
+      case 'playgrounds':
+        return '#033F63'
+      case 'woods':
+        return '#B2CEDE'
+      default:
+        throw Error('Invalid green area type')
+    }
+  }
+
   return {
     parks,
     gardens,
@@ -58,6 +77,7 @@ export function useGreenAreasTypes(greenAreasWays: Ref<OverpassWay[]>) {
     greenAreaTypes,
     addGreenAreaType,
     removeGreenAreaType,
+    getTypeColor,
   }
 }
 

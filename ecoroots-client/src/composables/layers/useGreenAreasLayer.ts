@@ -4,16 +4,16 @@ import { watchEffect, type Ref } from 'vue'
 import { useLayerGroup } from './useLayerGroup'
 
 export function useGreenAreasLayer(map: Ref<L.Map | null>, greenAreasTypes: TUseGreenAreasTypes) {
-  const { forests, gardens, parks, pitchs, playgrounds, woods, greenAreaTypes } = greenAreasTypes
+  const { forests, gardens, parks, pitchs, playgrounds, woods, greenAreaTypes, getTypeColor } =
+    greenAreasTypes
 
-  //TODO: make variables for the colors
   const layerGroups = [
-    useLayerGroup(forests, '#104911', 'forests'),
-    useLayerGroup(gardens, '#548C2F', 'gardens'),
-    useLayerGroup(parks, '#F2C14E', 'parks'),
-    useLayerGroup(pitchs, '#FEDC97', 'pitchs'),
-    useLayerGroup(playgrounds, '#033F63', 'playgrounds'),
-    useLayerGroup(woods, '#B2CEDE', 'woods'),
+    useLayerGroup(forests, getTypeColor('forests'), 'forests'),
+    useLayerGroup(gardens, getTypeColor('gardens'), 'gardens'),
+    useLayerGroup(parks, getTypeColor('parks'), 'parks'),
+    useLayerGroup(pitchs, getTypeColor('pitchs'), 'pitchs'),
+    useLayerGroup(playgrounds, getTypeColor('playgrounds'), 'playgrounds'),
+    useLayerGroup(woods, getTypeColor('woods'), 'woods'),
   ]
 
   const init = () => {
