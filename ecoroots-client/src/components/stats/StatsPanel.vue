@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cssVars } from '@/main'
+import { CssVariables } from '@/services/css/cssVarService'
 import type { EChartsOption } from 'echarts'
 import { PieChart } from 'echarts/charts'
 import { LegendComponent, TooltipComponent } from 'echarts/components'
@@ -37,7 +37,7 @@ const option = computed<EChartsOption>(() => {
         },
         itemStyle: {
           borderRadius: 5,
-          borderColor: cssVars.getPropertyValue('--color-background'),
+          borderColor: CssVariables.getCssVar('--color-background'),
           borderWidth: 5,
         },
         data: props.data,

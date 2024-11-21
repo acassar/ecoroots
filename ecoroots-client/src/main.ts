@@ -17,10 +17,6 @@ pinia.use(piniaPluginPersistedstate)
 
 const app = createApp(App)
 
-//TODO: make a service
-export const cssVars = getComputedStyle(document.getElementsByTagName('html')[0])
-console.log(cssVars.getPropertyValue('--color-primary'))
-
 const customPrimary = palette('#a8c686')
 
 const MyPreset = definePreset(Aura, {
