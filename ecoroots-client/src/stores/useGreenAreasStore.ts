@@ -35,6 +35,10 @@ export const useGreenAreasStore = defineStore(
     const playgrounds = computed(() =>
       greenAreasWays.value.filter((way) => way.tags?.leisure === 'playground'),
     )
+    const forests = computed(() =>
+      greenAreasWays.value.filter((way) => way.tags?.landuse === 'forest'),
+    )
+    const woods = computed(() => greenAreasWays.value.filter((way) => way.tags?.natural === 'wood'))
     // -- //
 
     return {
@@ -47,6 +51,8 @@ export const useGreenAreasStore = defineStore(
       gardens,
       pitchs,
       playgrounds,
+      forests,
+      woods,
     }
   },
   { persist: true },

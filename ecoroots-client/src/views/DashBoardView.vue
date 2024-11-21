@@ -5,7 +5,7 @@ import { useGreenAreasStore } from '@/stores/useGreenAreasStore'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
-const { gardens, parks, pitchs, playgrounds } = storeToRefs(useGreenAreasStore())
+const { gardens, parks, pitchs, playgrounds, forests, woods } = storeToRefs(useGreenAreasStore())
 
 const data = computed(() => {
   return [
@@ -13,6 +13,8 @@ const data = computed(() => {
     { value: parks.value.length, name: 'Parcs' },
     { value: pitchs.value.length, name: 'Terrains' },
     { value: playgrounds.value.length, name: 'Terrains de jeux' },
+    { value: forests.value.length, name: 'Forêts' },
+    { value: woods.value.length, name: 'Bois' },
   ]
 })
 </script>
