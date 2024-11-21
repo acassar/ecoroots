@@ -4,7 +4,7 @@ import L from 'leaflet'
 import { storeToRefs } from 'pinia'
 import { ref, type Ref } from 'vue'
 
-export function useGreenAreas(map: Ref<L.Map | null>) {
+export function useGreenAreasLayer(map: Ref<L.Map | null>) {
   const greenAreas = ref<L.LayerGroup>()
   const { greenAreasWays } = storeToRefs(useGreenAreasStore())
 

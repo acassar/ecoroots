@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useGreenAreas } from '@/composables/useGreenAreas'
+import { useGreenAreasLayer } from '@/composables/useGreenAreas'
 import { fetchOverpassData } from '@/services/api/overpassQuery'
 import { OVERPASS_GREEN_AREAS_QUERY } from '@/services/overpassTurbo/queries'
 import { useGreenAreasStore } from '@/stores/useGreenAreasStore'
@@ -11,7 +11,7 @@ const { greenAreas: greenAreasData, setGreenAreas } = useGreenAreasStore()
 
 const leafletMap = ref<L.Map | null>(null)
 
-const { greenAreas, init: initGreenAreas } = useGreenAreas(leafletMap as Ref<L.Map | null>)
+const { greenAreas, init: initGreenAreas } = useGreenAreasLayer(leafletMap as Ref<L.Map | null>)
 
 const initMap = () => {
   const _map = L.map('map').setView([48.8566, 2.3522], 13) //Pointed to Paris
